@@ -1,0 +1,1 @@
+export type TFormType = "income" | "expense" | "loan"| "personal";
