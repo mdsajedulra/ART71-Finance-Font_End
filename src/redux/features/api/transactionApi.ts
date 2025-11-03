@@ -25,6 +25,7 @@ export const transactionApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
+      providesTags: ["Transaction"],
     }),
     addTransaction: builder.mutation({
       query: (transactionData) => ({
@@ -32,6 +33,7 @@ export const transactionApi = baseApi.injectEndpoints({
         method: "POST",
         body: transactionData,
       }),
+      invalidatesTags: ["Transaction"],
     }),
   }),
   overrideExisting: false,

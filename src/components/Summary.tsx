@@ -59,7 +59,7 @@ function Summary() {
                 <Banknote className="w-4 h-4 text-income" />
                 <span>ব্যাংক</span>
               </div>
-              <h1 className="font-bold">৳ {data.data.overAll.cashBalance}</h1>
+              <h1 className="font-bold">৳ {data.data.overAll.bankBalance}</h1>
             </div>
           </div>
         </div>

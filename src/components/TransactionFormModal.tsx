@@ -3,12 +3,12 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "./ui/button";
 import { TransactionForm } from "./TransactionForm";
 import type { TFormType } from "@/types/formType";
+import { useState } from "react";
 
 function TransactionFormModal({
   buttonText,
@@ -17,18 +17,19 @@ function TransactionFormModal({
   buttonText: string;
   formType: TFormType;
 }) {
+  const [open, setOpen] = useState(false);
   return (
     <>
-      <Dialog>
+      <Dialog open={open} >
         <DialogTrigger asChild>
-          <Button>{buttonText}</Button>
+          <Button onClick={()=> setOpen(true)}>{buttonText}</Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Are you absolutely sure?</DialogTitle>
+            {/* <DialogTitle>Are you absolutely sure?</DialogTitle> */}
             <DialogDescription></DialogDescription>
           </DialogHeader>
-          <TransactionForm formType={formType} />
+          <TransactionForm formType={formType} setOpen={setOpen} />
         </DialogContent>
       </Dialog>
     </>

@@ -42,6 +42,7 @@ import {
 import type { TFormType } from "@/types/formType";
 import { useAddTransactionMutation } from "@/redux/features/api/transactionApi";
 import { toast } from "sonner";
+import type { Dispatch, SetStateAction } from "react";
 
 const formSchema = z.object({
   amount: z.coerce.number().min(1, "Amount is required").transform(Number),
@@ -67,7 +68,13 @@ const formSchema = z.object({
 });
 
 type FormSchemaType = z.infer<typeof formSchema>;
-export function TransactionForm({ formType }: { formType: TFormType }) {
+export function TransactionForm({
+  formType,
+  setOpen,
+}: {
+  formType: TFormType;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+}) {
   // console.log(date);
 
   const form = useForm<FormSchemaType>({
@@ -89,6 +96,7 @@ export function TransactionForm({ formType }: { formType: TFormType }) {
     try {
       const result = await addTransaction(data).unwrap();
       toast(result?.message);
+      setOpen(false);
     } catch (error: any) {
       toast(error?.data?.message || "Something went wrong");
     }
