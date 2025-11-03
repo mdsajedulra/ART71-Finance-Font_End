@@ -6,6 +6,7 @@ import { Navigate } from "react-router-dom";
 
 const PrivateRoutes = ({ children }: { children: ReactNode }) => {
   const token = useAppSelector(useCurrentToken);
+  console.log(token);
 
   if (!token) {
     return <Navigate to="/login" replace={true} />;

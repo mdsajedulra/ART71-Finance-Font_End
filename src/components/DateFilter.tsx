@@ -5,7 +5,7 @@ import { Calendar } from "./ui/calendar";
 import { Popover, PopoverTrigger } from "@radix-ui/react-popover";
 import { Button } from "./ui/button";
 import { PopoverContent } from "./ui/popover";
-import { formatDate } from "date-fns";
+import { formatDate, subDays } from "date-fns";
 import type { DateParams } from "@/types/date";
 
 export type DateRange = {
@@ -18,7 +18,7 @@ interface DateFilterProps {
 }
 export function DateFilter({ setDateParams }: DateFilterProps) {
   const [dateRange, setDateRange] = useState<DateRange>({
-    from: new Date(2025, 10, 1),
+    from: subDays(new Date(), 30),
     to: new Date(),
   });
   //   setDateParams({

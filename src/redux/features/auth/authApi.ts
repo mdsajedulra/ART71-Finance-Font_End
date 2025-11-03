@@ -2,10 +2,7 @@ import { baseApi } from "@/redux/api/baseApi";
 
 const authApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    login: build.mutation<
-      { token: string; message: string },
-      { email: string; password: string }
-    >({
+    login: build.mutation({
       query: (credentials) => ({
         url: "/auth/login",
         method: "POST",

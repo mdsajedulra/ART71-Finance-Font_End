@@ -28,6 +28,7 @@ import { useLoginMutation } from "@/redux/features/auth/authApi";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
+import type { TLoginResponse } from "@/types/Login";
 
 const formSchema = z.object({
   email: z.string(),
@@ -53,7 +54,8 @@ export function LoginForm() {
   const onSubmit: SubmitHandler<FormSchemaType> = async (data) => {
     console.log(data);
     try {
-      const result = await login(data).unwrap();
+      const result: TLoginResponse = await login(data).unwrap();
+      console.log("result", result);
       dispatch(
         setUser({ token: result?.data?.token, user: result?.data?.email })
       );
@@ -87,10 +89,10 @@ export function LoginForm() {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="form-rhf-demo-title">Email</FieldLabel>
+                    <FieldLabel htmlFor="form-rhf-demo-email">Email</FieldLabel>
                     <Input
                       {...field}
-                      id="form-rhf-demo-title"
+                      id="form-rhf-demo-email"
                       aria-invalid={fieldState.invalid}
                       placeholder="Enter your email"
                       autoComplete="off"
@@ -108,10 +110,12 @@ export function LoginForm() {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="form-rhf-note">Password</FieldLabel>
+                    <FieldLabel htmlFor="form-rhf-password">
+                      Password
+                    </FieldLabel>
                     <Input
                       {...field}
-                      id="form-rhf-demo-title"
+                      id="form-rhf-demo-password"
                       aria-invalid={fieldState.invalid}
                       placeholder="Enter your Password"
                       autoComplete="off"
